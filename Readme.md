@@ -1,4 +1,4 @@
-# Multi-Lookback Momentum × Liquidity Factor Factory (1M / 3M / 6M / 12M)
+## Multi-Lookback Momentum & Liquidity Factor Factory (1M / 3M / 6M / 12M)
 
 **Research-Grade Factor Backtesting Framework** | Python + Pandas + Parquet | One-File Output (Excel / CSV)
 
