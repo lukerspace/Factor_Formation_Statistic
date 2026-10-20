@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.venv/
+venv/
+
+# 研究輸出
+output/
+output_*/
+
+# 價格資料一律走中央 loader，不進 repo
+*.parquet

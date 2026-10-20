@@ -1,3 +1,30 @@
+"""
+[已取代 — 保留作為對照基準，請勿執行]
+
+這是本專案的原始版本。它被 `factorlab` 套件取代，原因不是檔案太長，
+而是它的檢驗統計量無法支持任何結論：
+
+1. 最後一段用 `scipy.stats.ttest_1samp` 對重疊的 fwd_3m/6m/12m 報酬做檢定，
+   t 值高估約 sqrt(h) 倍（h=12 時 3.46 倍）。
+2. 回報 Q10-Q1 的原始平均數並稱之為策略報酬 —— 那不是風險調整後的 alpha。
+3. 32 個參數組合沒有任何多重檢定校正。
+4. 只看兩端，沒有檢驗分位報酬的單調性。
+5. 樣本只有 23-34 個月，「不顯著」被誤讀成「沒有效果」。
+
+另有三個實作問題：
+- `skip_holding_month` 把再平衡日往後推一個月（遲延進場），
+  而 Jegadeesh-Titman 的 skip 是跳過形成期最後一個月。
+- 流動性篩選用 `form_start - 1M`，lookback=12 時是 13 個月前的流動性。
+- `pd.qcut(..., duplicates='drop')` 在同值多時會把第 7 分位重新貼上 "Q10" 標籤。
+
+此外它硬編了 parquet 檔名，違反「美股價格唯一走中央 loader」的規則。
+
+請改用：
+    python -m factorlab.cli run --history long
+
+詳見 Readme.md 與 factorlab/__init__.py。
+"""
+
 import pandas as pd
 import numpy as np
 from pathlib import Path
